@@ -1,3 +1,4 @@
+import 'package:banking_system/Pages/dialogPage.dart';
 import 'package:banking_system/Pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,6 +100,16 @@ class _TransferMoneyScreenState extends State<TransferMoneyScreen> {
                           await DatabaseHelper.instance.insertCustomerTransaction(instance);
                           setState(() => isloading=false);
                           Navigator.push(context,MaterialPageRoute(builder:(context)=> MyHomePage()));
+                        }
+                        else{
+                          showDialog(
+                            context: context,
+                            builder: (context) => dialogBox(context),
+                            barrierDismissible: false,
+                            barrierColor: Colors.black54,
+                          );
+                          amountController.text='';
+                          receiverController.text='';
                         }
                       },
                       child: Text('Commit Transaction',
